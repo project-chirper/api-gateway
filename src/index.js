@@ -1,12 +1,13 @@
 const express = require('express')
-const proxy = require('http-proxy-middleware')
-const auth = require('auth-middleware')
+const cors = require('cors')
+const auth = require('chirper-auth-middleware')
 
 // Express app
 const app = express()
 
 // Middlewares
 app.use(require('./debug')) // debugging
+app.use(cors())
 
 // Debug Route
 app.get('/', auth({ required: true }), (req, res) => {
@@ -14,11 +15,7 @@ app.get('/', auth({ required: true }), (req, res) => {
 })
 
 // Proxies
-
-app.use( // user-service
-  '/user',
-  proxy({ target: 'http://user-service:3002' })
-)
+app.use('/api', require('./proxies'))
 
 // listen
 app.listen(process.env.PORT, console.log(`Listening on port ${process.env.PORT}`))
