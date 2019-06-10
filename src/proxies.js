@@ -18,4 +18,4 @@ router.use( // post-service
   })
 )
 
-module.exports = router 
+module.exports = router

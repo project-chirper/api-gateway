@@ -10,8 +10,8 @@ app.use(require('./debug')) // debugging
 app.use(cors())
 
 // Debug Route
-app.get('/', auth({ required: true }), (req, res) => {
-  return res.send(`I am alive, friend.\n${req.info}`).end()
+app.get('/', (req, res) => {
+  return res.send(`I am alive, friend.\n${req.info} ;)`).end()
 })
 
 // Proxies
